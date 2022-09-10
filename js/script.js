@@ -3,7 +3,8 @@ const getElementText = (id) => {
     return element;
 };
 const clickHandler = () => {
-    let inputValue = getElementText("todo-text").value;
+    let inputElement = getElementText("todo-text");
+    let inputValue = inputElement.value;
     let haveTodo = JSON.parse(localStorage.getItem("Todo"));
     if (!haveTodo) {
         let todoList = [{ title: inputValue }];
@@ -12,6 +13,7 @@ const clickHandler = () => {
         let todoList = [...haveTodo, { title: inputValue }];
         localStorage.setItem("Todo", JSON.stringify(todoList));
     }
+    inputElement.value = "";
     render();
 };
 
@@ -22,7 +24,7 @@ const render = () => {
     todo.forEach((item) => {
         let li = document.createElement("li");
         li.innerText = item.title;
-        li.classList.add("py-3");
+        li.classList.add("py-1");
         ul.appendChild(li);
     });
     // clearItems();
